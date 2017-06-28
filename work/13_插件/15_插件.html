@@ -6,8 +6,25 @@
 </head>
 <body>
 
+<div id="app">
+  <p v-my-directive="msg"></p>
+</div>
+
 <script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript" src="myPlugin.js"></script>
 <script type="text/javascript">
+  // 内部调用 `MyPlugin.install(Vue)`
+  Vue.use(MyPlugin)
+
+  var vm = new Vue({
+    el : '#app',
+    data : {
+      msg: 'atguigu.com'
+    }
+  })
+
+  Vue.myGlobalMethod()
+  vm.$myMethod()
 </script>
 </body>
 </html>
