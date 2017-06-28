@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>09_列表渲染</title>
+</head>
+<body>
+
+<!--
+1. 遍历显示数组 : v-for / index
+2. 遍历显示对象 : v-for / key
+-->
+
+<div id="demo">
+
+  <h2>测试: v-for 遍历数组</h2>
+    <ul>
+        <li v-for="(person,index) in persons">{{index}}---name: {{person.name}}---age: {{person.age}}</li><br>
+        <li v-for="(person2,index) in filterPersons">{{index}}---name: {{person2.name}}---age: {{person2.age}}
+        <button @click="removeP(person2)">删除</button>
+        <button @click="updateP(person2,{name:'Cot',age:13})">更新</button>
+        </li><br>
+    </ul>
+   <!--  Array.prototype.filter(function(item, index){}) : 遍历过滤出一个子数组     -->
+  <h2>测试: v-for 遍历对象</h2>
+    <ul>
+        <li v-for="(value,key) in persons[0]">{{key}}----{{value}}</li>
+    </ul>
+</div>
+
+<script type="text/javascript" src="../../vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el : "#demo",
+        data : {
+            persons : [
+                {name : "无脸男" ,age : 18},
+                {name : "琥珀川" ,age : 13},
+                {name : "龙猫", age : 11}
+            ],
+            persons2 : [
+                {name: 'Tom', age: 12},
+                {name: 'Jack', age: 15},
+                {name: 'Bob', age: 14}
+            ]
+        },
+        methods :{
+            removeP(person2){
+                let index = this.persons2.indexOf(person2);
+                this.persons2.splice(index,1)
+            },
+            updateP(oldP,newP){
+
+                // splice 可以用来实现删除，增加，修改
+                //  todo   this.persons2.splice(index,0,person2)  表示的是不删除，即增加一个新的
+                // todo  this.persons2.splice(0,1,person2)   表是的是在第一位更新一个新的数据
+                var index = this.persons2.indexOf(oldP);
+                console.log(index);
+                this.persons2.splice(index,1,newP)
+            }
+        },
+        computed : { // filter 返回的yi个新数组是满足后面的后面的回调的数组，即值为true的放回新的数组
+            filterPersons(){
+                return this.persons2.filter(person2 => person2.name.indexOf('o') >=0)
+            }
+        }
+    })
+</script>
+</body>
+</html>

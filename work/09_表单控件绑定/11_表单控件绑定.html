@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--
+1. 使用v-model对表单项数据双向绑定
+  text/textarea
+  checkbox : 绑定boolean/string值
+  radio
+  select
+2. 失去焦点才更新: .lazy
+3. 自动去除两端空格: .trim
+-->
+<div id="demo">
+    <input type="text" v-model="msg"><br>
+    <textarea name="" id="" cols="20" rows="5" v-model="msg"></textarea>
+    <p>{{msg}}</p>
+    <hr></hr>
+    <input type="checkbox" v-model="ok"> {{ok}}<br>
+    <hr>
+    <input type="checkbox" name="students" v-model="selectStudents" value="无脸男">wuLianNan
+    <input type="checkbox" name="students" v-model="selectStudents" value="龙猫">longMao
+    <input type="checkbox" name="students" v-model="selectStudents" value="琥珀川">HuPoChuan
+    {{selectStudents}}
+    <hr>
+    <br>
+    <input type="radio" name="sex" value="female" v-model="sex"> 女
+    <input type="radio" name="sex" value="male" v-model="sex"> 男
+    <br>
+    <hr>
+    <br>
+    <select name="city" v-model="selectCity">
+        <option :value="city.id" v-for="city in citys">{{city.name}}</option>
+
+    </select>
+    {{selectCity}}
+    <br>
+    <hr>
+    <br>
+    <input type="text" placeholder="失去焦点之后才同步数据" v-model.lazy="msg2">--{{msg2}}<br>
+    <input type="text" placeholder="自动去空格" v-model.trim="msg3">--{{msg3}}---
+</div>
+
+<script type="text/javascript" src="../../vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el : '#demo',
+        data :{
+            msg : '无脸男',
+            ok : true,
+            selectStudents : ['无脸男'],
+            sex : 'female', // 这样是为了一上来就默认显示是女的
+            citys : [
+                {id : 1 , name : '北京'},
+                {id : 3, name : "上海"},
+                {id :5 , name : '深圳'}
+            ],
+            selectCity : 1  ,// 默认一上来就显示的那个城市，用id 选择
+            msg2 :'',
+            msg3  :''
+        }
+
+    })
+</script>
+</body>
+</html>

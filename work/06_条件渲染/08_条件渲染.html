@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>08_条件渲染</title>
+</head>
+<body>
+<!--
+切换一个元素:
+  v-if
+  v-else
+  v-show
+切换多个元素
+  <template v-if="ok">  //不能用v-show
+注意:
+  如果需要频繁切换 v-show 较好，如果在运行时条件不大可能改变 v-if 较好
+-->
+
+<div id="demo">
+  <h1>测试: 切换一个元素</h1>
+    <!--  v-if 和 v-else 只能显示一个，通过布尔值来控制他们的显示状态 这两个控制页面的显示隐藏是通过移除页面元素来实现的-->
+    <p v-if="ok">我喜欢无脸男</p>
+    <p v-else>无脸男喜欢我</p>
+    <p v-show="ok">我喜欢无脸男</p>
+    <!--  v-show 控制显示隐藏是通过  display:none 来实现的-->
+    <button @click="ok=!ok">点击切换</button>
+
+
+  <h1>测试: 切换多个元素</h1>
+<!-- template 这个标签在页面中是不会显示的  -->
+    <template v-if="ok">
+        <p>哈哈哈</p>
+        <h1>呵呵</h1>
+        <h2>神经病</h2>
+    </template>
+    <button @click="ok=!ok">点击切换</button>
+
+</div>
+
+<script type="text/javascript" src="../../vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el : "#demo",
+        data : {
+            ok : true
+        }
+    })
+</script>
+</body>
+</html>
